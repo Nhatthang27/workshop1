@@ -1,0 +1,31 @@
+<nav class="navbar navbar-inverse mg-bot-0">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="dashboard.jsp">
+                <c:if test="${sessionScope.account != null}">
+                    Welcome ${sessionScope.account.username} <span class="text-danger">[${sessionScope.account.role == 1 ? 'Manager' : 'Staff'}]</span>
+                </c:if>
+            </a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="DispatcherProductServlet?action=showCategoryList">Categories</a></li>
+            <li><a href="DispatcherProductServlet?action=showProductList">Products</a></li>
+            <c:if test="${sessionScope.account != null && sessionScope.account.role == 1}">
+                <li><a href="DispatcherAccountServlet?action=showAccountList">Accounts</a></li>
+            </c:if>
+        </ul>
+        <c:choose>
+            <c:when test="${sessionScope.account == null}">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="DispatcherAccountServlet?action=loginPage"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                </ul>
+            </c:when>
+            <c:otherwise>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="DispatcherAccountServlet?action=logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                </ul>
+            </c:otherwise>
+        </c:choose>
+    </div>
+</nav>

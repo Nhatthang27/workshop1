@@ -1,0 +1,9 @@
+### NetBeans ###
+**/nbproject/private/
+**/nbproject/Makefile-*.mk
+**/nbproject/Package-*.bash
+Workshop1_Web/build/
+Workshop1_Web/nbbuild/
+Workshop1_Web/dist/
+Workshop1_Web/nbdist/
+Workshop1_Web/.nb-gradle/
