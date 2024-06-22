@@ -40,7 +40,6 @@ public class ActiveAccountServlet extends HttpServlet {
 
         String username = request.getParameter("username");
         String isActive = request.getParameter("isActive");
-        System.out.println(username);
         String action = SHOW_ACCOUNT_LIST_ACTION;
         AccountDao accDao = new AccountDao(getServletContext());
         try {

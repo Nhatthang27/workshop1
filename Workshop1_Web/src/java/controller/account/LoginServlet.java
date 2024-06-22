@@ -22,8 +22,9 @@ import model.dao.AccountDao;
  */
 public class LoginServlet extends HttpServlet {
 
-    private final String DASHBOARD_PAGE = "dashboard.jsp";
-    private final String LOGIN_PAGE = "login.jsp";
+    private final String DASHBOARD_ACTION = "showDashboard";
+    private final String LOGIN_PAGE_ACTION = "loginPage";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,8 +38,7 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-
-        String url = LOGIN_PAGE;
+        String url = "DispatcherProductServlet?action=" + DASHBOARD_ACTION;
         try {
             AccountDao accDao = new AccountDao(getServletContext());
             String username = request.getParameter("username");
@@ -46,14 +46,13 @@ public class LoginServlet extends HttpServlet {
             int result = accDao.isExistAccount(username, password);
 
             if (result == 1) {
-                url = DASHBOARD_PAGE;
                 HttpSession sess = request.getSession();
                 sess.setAttribute("account", accDao.getObjectByID(username));
-                
+
                 Cookie cu = new Cookie("username", username);
                 Cookie cp = new Cookie("password", password);
                 Cookie cr = new Cookie("rmb", "1");
-                
+
                 String rmb = request.getParameter("rmb");
                 if (rmb == null) {
                     cu.setMaxAge(0);
@@ -68,21 +67,21 @@ public class LoginServlet extends HttpServlet {
                 response.addCookie(cp);
                 response.addCookie(cr);
             } else if (result == 0) {
+                url = "DispatcherAccountServlet?action=" + LOGIN_PAGE_ACTION;
                 request.setAttribute("error", "Username or password is wrong !");
-                url = LOGIN_PAGE;
-            } else if (result == -1) {
+            } else {
+                url = "DispatcherAccountServlet?action=" + LOGIN_PAGE_ACTION;
                 request.setAttribute("error", "Account is not active !");
-                url = LOGIN_PAGE;
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
-        } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
         }
+        RequestDispatcher rd = request.getRequestDispatcher(url);
+        rd.forward(request, response);
     }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

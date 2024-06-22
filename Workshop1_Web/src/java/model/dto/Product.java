@@ -118,5 +118,11 @@ public class Product {
         this.quantity = quantity;
     }
 
+    @Override
+    public String toString() {
+        return "Product{" + "productId=" + productId + ", productName=" + productName + ", productImage=" + productImage + ", brief=" + brief + ", postedDate=" + postedDate + ", category=" + category + ", account=" + account + ", price=" + price + ", discount=" + discount + ", quantity=" + quantity + '}';
+    }
+
+    
     
 }

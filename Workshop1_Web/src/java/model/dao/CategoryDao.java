@@ -29,23 +29,162 @@ public class CategoryDao implements CommonDao<Category> {
     }
 
     @Override
-    public int insert(Category Obj) throws ClassNotFoundException, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public int insert(Category cate) throws ClassNotFoundException, SQLException {
+        int result = 0;
+
+        Connection con = null;
+        PreparedStatement stm = null;
+
+        try {
+            //1. CONNECT DB
+            con = DBContext.getConnection(sc);
+            if (con != null) {
+                //2. SQL 
+                String sql = "INSERT INTO [dbo].[Category]\n"
+                        + "           ([categoryName]\n"
+                        + "           ,[note])\n"
+                        + "     VALUES\n"
+                        + "           (?, ?)";
+                //3. Statement 
+                stm = con.prepareStatement(sql);
+                stm.setString(1, cate.getCategoryName().trim());
+                if (cate.getNote() != null) {
+                    stm.setString(2, cate.getNote().trim());
+                }
+
+                //4. Excute
+                result = stm.executeUpdate();
+
+                //5. Process Result
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
     }
 
     @Override
-    public int update(String oldObjID, Category newOj) throws ClassNotFoundException, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public int update(String oldCategoryId, Category newCate) throws ClassNotFoundException, SQLException {
+        int result = 0;
+
+        Connection con = null;
+        PreparedStatement stm = null;
+
+        try {
+            //1. CONNECT DB
+            con = DBContext.getConnection(sc);
+            if (con != null) {
+                //2. SQL 
+                String sql = "UPDATE [dbo].[Category]\n"
+                        + "   SET [categoryName] = ?\n"
+                        + "      ,[note] = ?\n"
+                        + " WHERE categoryId = ?";
+                //3. Statement 
+                System.err.println("id in DAO: " + oldCategoryId);
+                stm = con.prepareStatement(sql);
+                stm.setString(1, newCate.getCategoryName().trim());
+                stm.setString(2, newCate.getNote().trim());
+                stm.setInt(3, Integer.parseInt(oldCategoryId));
+
+                //4. Excute
+                result = stm.executeUpdate();
+
+                //5. Process Result
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
     }
 
     @Override
-    public int delete(String objID) throws ClassNotFoundException, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public int delete(String categoryId) throws ClassNotFoundException, SQLException {
+        int result = 0;
+
+        Connection con = null;
+        PreparedStatement stm = null;
+
+        try {
+            //1. CONNECT DB
+            con = DBContext.getConnection(sc);
+            if (con != null) {
+                //2. SQL 
+                String sql = "DELETE FROM [dbo].[Category]\n"
+                        + "      WHERE categoryId = ?";
+                //3. Statement 
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, Integer.parseInt(categoryId));
+
+                //4. Excute
+                result = stm.executeUpdate();
+
+                //5. Process Result
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
     }
 
     @Override
     public Category getObjectByID(String id) throws ClassNotFoundException, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Category cate = null;
+
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+
+        try {
+            //1. CONNECT DB
+            con = DBContext.getConnection(sc);
+            if (con != null) {
+                //2. SQL 
+                String sql = "SELECT [categoryId]\n"
+                        + "      ,[categoryName]\n"
+                        + "      ,[note]\n"
+                        + "  FROM [dbo].[Category]"
+                        + "  WHERE [categoryId] = ?";
+                //3. Statement 
+                stm = con.prepareStatement(sql);
+                stm.setString(1, id);
+                //4. Excute
+                rs = stm.executeQuery();
+
+                //5. Process Result
+                if (rs.next()) {
+                    int categoryId = rs.getInt("categoryId");
+                    String categoryName = rs.getString("categoryName").trim();
+                    String note = rs.getString("note").trim();
+                    cate = new Category(categoryId, categoryName, note);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return cate;
     }
 
     public List<Category> getAllCategories() throws ClassNotFoundException, SQLException {
@@ -76,8 +215,8 @@ public class CategoryDao implements CommonDao<Category> {
                         categories = new ArrayList<>();
                     }
                     int categoryId = rs.getInt("categoryId");
-                    String categoryName = rs.getString("categoryName");
-                    String note = rs.getString("note");
+                    String categoryName = rs.getString("categoryName").trim();
+                    String note = rs.getString("note").trim();
                     Category cate = new Category(categoryId, categoryName, note);
                     categories.add(cate);
                 }

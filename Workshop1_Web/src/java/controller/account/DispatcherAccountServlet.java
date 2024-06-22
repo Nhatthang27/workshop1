@@ -17,9 +17,6 @@ import javax.servlet.http.HttpServletResponse;
  * @author Nhatthang
  */
 public class DispatcherAccountServlet extends HttpServlet {
-
-    private final String DASHBOARD_PAGE_ACTION = "dashboard";
-    private final String DASHBOARD_PAGE = "dashboard.jsp";
     
     private final String SHOW_ACCOUNT_LIST_ACTION = "showAccountList";
     private final String SHOW_ACCOUNT_LIST_CONTROLLER = "ShowAccountListServlet";
@@ -66,13 +63,11 @@ public class DispatcherAccountServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        String url = DASHBOARD_PAGE;
+        String url = LOGIN_PAGE;
         String action = request.getParameter("action");
+        
         try {
             switch (action) {
-                case DASHBOARD_PAGE_ACTION:
-                    url = DASHBOARD_PAGE;
-                    break;
                 case LOGIN_PAGE_ACTION:
                     url = LOGIN_PAGE;
                     break;

@@ -19,7 +19,6 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <%@include file="header.jspf"%>
         <div class="row mg-0">
             <div class="col-md-12">
                 <form action="DispatcherAccountServlet" method="post">

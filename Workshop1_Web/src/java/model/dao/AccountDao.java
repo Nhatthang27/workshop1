@@ -103,8 +103,8 @@ public class AccountDao implements CommonDao<Account> {
                 System.out.println("Old ID: " + oldAccID);
                 stm = con.prepareStatement(sql);
                 stm.setString(1, newAcc.getPassword());
-                stm.setString(2, newAcc.getLastName());
-                stm.setString(3, newAcc.getFirstName());
+                stm.setString(2, newAcc.getLastName().trim());
+                stm.setString(3, newAcc.getFirstName().trim());
                 stm.setDate(4, newAcc.getDob());
                 stm.setBoolean(5, newAcc.isGender());
                 stm.setString(6, newAcc.getPhone());

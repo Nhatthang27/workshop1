@@ -19,8 +19,15 @@
     </head>
     <body>
         <%@include file="header.jspf"%> 
+
         <div class="container">
             <h1 class="text-center">Category Management</h1>
+            <form action="DispatcherProductServlet" method="POST" style="padding: 0">
+                <button type="submit" class="btn btn-info btn-sm px-3" name="action" value="addCategoryPage">
+                    Add a new category
+                </button>
+            </form>
+
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -34,10 +41,17 @@
                     <c:forEach items="${requestScope.categories}" var="cate"> 
                         <tr>
                             <td>${cate.categoryId}</td>
-                            <td>${cate.categoryName} 1</td>
+                            <td>${cate.categoryName}</td>
                             <td>${cate.note}</td>
+
                             <td>
-                                <a href="edit-product.html?id=1" class="btn btn-primary btn-sm">Edit</a>
+                                <form action="DispatcherProductServlet" method="POST">
+                                    <input type="hidden" id="categoryId" name="categoryId" value="${cate.categoryId}">
+                                    <input type="hidden" id="categoryName" name="categoryName" value="${cate.categoryName}">
+                                    <input type="hidden" id="categoryNote" name="categoryNote" value="${cate.note}">
+                                    <button  class="btn btn-primary btn-sm" name="action" value="updateCategoryPage">Update</button>
+                                    <button  class="btn btn-danger btn-sm" name="action" value="deleteCategory">Delete</button>
+                                </form>
                             </td>
                         </tr>
                     </c:forEach>

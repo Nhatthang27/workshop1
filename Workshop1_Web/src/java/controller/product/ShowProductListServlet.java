@@ -50,7 +50,6 @@ public class ShowProductListServlet extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(ShowProductListServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println(action);
         RequestDispatcher rd = request.getRequestDispatcher("DispatcherProductServlet?action=" + action);
         rd.forward(request, response);
     }

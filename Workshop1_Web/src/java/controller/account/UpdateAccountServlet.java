@@ -59,9 +59,7 @@ public class UpdateAccountServlet extends HttpServlet {
             boolean isActive = (isActive_txt == null ? false : true);
             int role = Integer.parseInt(role_txt);
             Account newAcc = new Account(username, password, lastName, firstName, dob, gender, phone, isActive, role);
-            System.out.println("newAcc: " + newAcc);
             accDao.update(username, newAcc);
-            System.out.println("No Exception");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(UpdateAccountServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {

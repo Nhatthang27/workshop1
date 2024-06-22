@@ -100,11 +100,10 @@ insert into Product (productId, productName, productImage, brief, username, pric
 					   'hungnguyen', 709000,0,1,N'Bộ');
 go
 -- Trang trí nội thất -------------------------------------------------------------------------------------------------------
-insert into Product (productId, productName, productImage, brief, username, price, discount, categoryId, unit)  
-              values('4062373305', N'Ghế thư giãn', '/images/sanPham/gheThuGian.jpg',
-			          N'Ghế làm chất liệu cao cấp, chắc chắn. Dùng ở văn phong, đi dã ngoại, ở nhà.
-						Dễ dàng gấp gọn, Nằm cực sướng, giúp thư giãn lưng sau mỗi ngày làm việc', 
-					 'hungnguyen', 699000,10,3, N'Cái');
+insert into Product (productId, productName, productImage, brief, username, price, discount, categoryId)  
+              values('4062373305', N'Ghế thư giãn', 'gheThuGian.jpg',
+			          N'Ghế làm chất liệu cao cấp, chắc chắn. Dùng ở văn phong, đi dã ngoại, ở nhà. Dễ dàng gấp gọn, Nằm cực sướng, giúp thư giãn lưng sau mỗi ngày làm việc', 
+					 'nhatthang27', 699000, 10, 3);
 go
 insert into Product (productId, productName, productImage, brief, username, price, discount, categoryId, unit)  
               values('8868354221', N'Bàn Trà Sofa Phong Cách Bắc Âu - IGEA', '/images/sanPham/banTraSofaIGEA.jpg',

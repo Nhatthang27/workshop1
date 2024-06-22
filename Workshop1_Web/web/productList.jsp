@@ -21,6 +21,11 @@
         <%@include file="header.jspf"%> 
         <div class="container">
             <h1 class="text-center">Product Management</h1>
+
+            <a href="DispatcherProductServlet?action=getProductDetail&add_update_detail=add">
+                <button type="button" class="btn btn-info btn-sm px-3">Add a new product</button>
+            </a>
+
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -31,21 +36,30 @@
                         <th>Quantity</th>
                         <th>Posted Date</th>
                         <th>Action</th>
-                            
+
                     </tr>
                 </thead>
                 <tbody>
                     <c:forEach items="${requestScope.products}" var="prd"> 
                         <tr>
                             <td>${prd.productId}</td>
-                            <td>${prd.productName} 1</td>
+                            <td>${prd.productName}</td>
                             <td>${prd.price}</td>
                             <td>${prd.discount}</td>
                             <td>${prd.quantity}</td>
                             <td>${prd.postedDate}</td>
                             <td>
-                                <a href="product-details.html?id=1" class="btn btn-warning btn-sm">Details</a>
-                                <a href="edit-product.html?id=1" class="btn btn-primary btn-sm">Edit</a>
+                                <a href="DispatcherProductServlet?action=getProductDetail&add_update_detail=detail&productId=${prd.productId}">
+                                    <button type="button" class="btn btn-warning btn-sm">Detail</button>
+                                </a>
+
+                                <a href="DispatcherProductServlet?action=getProductDetail&add_update_detail=update&productId=${prd.productId}">
+                                    <button type="button" class="btn btn-primary btn-sm">Update</button>
+                                </a>
+
+                                <a href="DispatcherProductServlet?action=deleteProduct&productId=${prd.productId}">
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </a>
                             </td>
                         </tr>
                     </c:forEach>

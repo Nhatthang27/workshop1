@@ -21,6 +21,11 @@ public class Category {
         this.categoryName = categoryName;
         this.note = note;
     }
+    
+    public Category(String categoryName, String note) {
+        this.categoryName = categoryName;
+        this.note = note;
+    }
 
     public int getCategoryId() {
         return categoryId;

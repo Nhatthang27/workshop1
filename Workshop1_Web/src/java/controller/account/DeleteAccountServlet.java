@@ -39,7 +39,6 @@ public class DeleteAccountServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
         String username = request.getParameter("username");
-        System.out.println(username);
         String action = SHOW_ACCOUNT_LIST_ACTION;
         AccountDao accDao = new AccountDao(getServletContext());
         try {

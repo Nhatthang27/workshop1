@@ -60,12 +60,6 @@ public class AddAccountServlet extends HttpServlet {
             int role = Integer.parseInt(role_txt);
             Account newAcc = new Account(username, password, lastName, firstName, dob, gender, phone, isActive, role);
             int result = accDao.insert(new Account(username, password, lastName, firstName, dob, gender, phone, isActive, role));
-//            if (result == 0) {
-//                System.err.println("Insert Fail");
-//            } else {
-//                RequestDispatcher rd = request.getRequestDispatcher("DispatcherAccountServlet?action=showAccountList");
-//                rd.forward(request, response);
-//            }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AddAccountServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {

@@ -39,7 +39,6 @@ public class GetAccountInfoServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        System.out.println("GetAccountInfoServlet");
         AccountDao accDao = new AccountDao(getServletContext());
         String username_uAcc = request.getParameter("username");
         String action = UPDATE_ACCOUNT_PAGE_ACTION;
