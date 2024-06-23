@@ -52,9 +52,9 @@ public class AddProductServlet extends HttpServlet {
             Date postedDate = new Date(new java.util.Date().getTime());
             Category category = new CategoryDao(getServletContext()).getObjectByID(request.getParameter("category"));
             Account account = (Account) request.getSession().getAttribute("account");
-            int price = Integer.parseInt(request.getParameter("price"));
-            int discount = Integer.parseInt(request.getParameter("discount"));
-            int quantity = Integer.parseInt(request.getParameter("quantity"));
+            int price = request.getParameter("price") == null ? 0 : Integer.parseInt(request.getParameter("price"));
+            int discount = request.getParameter("discount").isEmpty() ? 0 : Integer.parseInt(request.getParameter("discount"));
+            int quantity = request.getParameter("quantity") == null ? 0 : Integer.parseInt(request.getParameter("quantity"));
 
             Product newPrd = new Product(productId, productName, productImage, productBrief, postedDate, category, account, price, discount, quantity);
             ProductDao prdDao = new ProductDao(getServletContext());

@@ -73,7 +73,7 @@
                             <button type="submit" name="action" value="addAccount">Sign Up</button>
                         </div>
                         <div class="col-md-6">
-                            <a href="DispatcherAccountServlet?action=dashboard"><button class="btn-danger" type="button">Cancel</button></a>
+                            <a href="DispatcherAccountServlet?action=showAccountList"><button class="btn-danger" type="button">Cancel</button></a>
                         </div>
                     </div>
                 </form>
